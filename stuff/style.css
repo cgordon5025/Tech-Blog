@@ -1,0 +1,13 @@
+#loginContainer {
+    border: 4px solid black;
+}
+
+#loginContainer p,
+#loginContainer input {
+    margin: 5px
+}
+
+#title {
+    background-color: black;
+    color: white;
+}
