@@ -3,6 +3,14 @@ const { User, Post, Comment } = require('../../models')
 const bcrypt = require('bcrypt');
 
 //URL here is localhost:3001/api/user/login
+
+router.get('/', async (req, res) => {
+    const userData = await User.findAll({
+        include: [{ model: Post }, { model: Comment }]
+    });
+    const users = userData.map((data) => data.get({ plain: true }))
+    res.json(users)
+})
 router.post('/login', async (req, res) => {
     try {
         const userData = await User.findOne({ where: { email: req.body.email } });
@@ -37,3 +45,5 @@ router.post('/signup', async (req, res) => {
         res.status(500).json(err)
     }
 })
+
+module.exports = router

@@ -8,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
     <!-- import bootstrap for card formatting -->
     <link rel="stylesheet" href="./style.css">
 </head>
@@ -24,9 +25,9 @@
             HELLLLLO
         </p>
     </header>
-    <div id="loginContainer">
-        <p id="title"> Login</p>
-        <div class="inputContainer">
+    <div class="card">
+        <div class="card-header bg-info" id="loginContainer">Login</div>
+        <div class="card-body" id="inputContainer">
             <p> Username</p>
             <input id="usernameInput">
             <p> Password</p>
@@ -39,19 +40,19 @@
     <div class="homeContainer">
         <p> Headrr will havr the Tech Blog</p>
         <ul>
-            <li>
-                <h2>Title</h2>
-                <p> text about the post and what is happening here</p>
+            <li class="card">
+                <h2 class="card-header">Title</h2>
+                <p class="card-body"> text about the post and what is happening here</p>
             </li>
             <section>
                 <!-- then replace the text box with static elements that have the timestamp and user who commented -->
                 <p> this is a new window for a comment</p>
-                <textarea>write somethign</textarea>
+                <textarea class="w-100">write somethign</textarea>
                 <button>Submit comment</button>
             </section>
-            <li>
-                <h2>Title</h2>
-                <p> text about the post and what is happening here</p>
+            <li class="card">
+                <h2 class="card-header">Title</h2>
+                <p class="card-body"> text about the post and what is happening here</p>
             </li>
         </ul>
 
