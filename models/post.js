@@ -31,13 +31,13 @@ Post.init(
     },
     {
         sequelize,
-        timestamps: false,
+        timestamps: true,
         freezeTableName: true,
         underscored: true,
         modelName: 'post'
     }
 );
-
+//we want to be able to grab the time stamps so we can show when it was posted on the front end
 //Maybe add allowNull:false to the foreign keys retroactively
 
 module.exports = Post;
