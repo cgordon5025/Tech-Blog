@@ -1,4 +1,3 @@
-const e = require('express');
 const { User } = require('../models');
 
 const userData = [
@@ -14,6 +13,9 @@ const userData = [
     }
 ];
 
-const seedUsers = () => User.bulkCreate(userData);
+const seedUsers = () => User.bulkCreate(userData, {
+    individualHooks: true,
+    // hooks: true,
+});
 
 module.exports = seedUsers
