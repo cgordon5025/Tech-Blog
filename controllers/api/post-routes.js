@@ -30,7 +30,27 @@ router.put('/:id', async (req, res) => {
                 id: req.params.id
             }
         })
+        if (!postData) {
+            res.status(404).json({ message: "No post found with this id, please try again" });
+            return;
+        }
         res.json(postData)
+    } catch (err) {
+        res.status(500).json(err)
+    }
+})
+
+router.delete('/:id', async (req, res) => {
+    try {
+        const postData = await Post.destroy({
+            where: {
+                id: req.params.id
+            }
+        })
+        if (!postData) {
+            res.status(404).json({ message: "No post found with this id, please try again" });
+            return;
+        }
     } catch (err) {
         res.status(500).json(err)
     }
