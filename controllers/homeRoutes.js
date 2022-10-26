@@ -25,18 +25,21 @@ router.get('/login', async (req, res) => {
 router.get('/', async (req, res) => {
     try {
         const postData = await Post.findAll({
-            // where: { userID: req.session.userID }
-            // include: [{
-            //     model: Comment,
-            //     attributes: ['comment_text', 'user_id']
-            // }]
+            include: [{
+                model: Comment,
+                attributes: ['comment_text', 'user_id']
+            },
+            {
+                model: User,
+                attributes: ['username']
+            }]
         })
         const posts = postData.map((post) =>
             post.get({ plain: true })
         )
         // posts.userPost = await User.findByPk({
         //     where: {
-        //         id: user_id
+        //         id: post.user_id
         //     }
         // })
 
@@ -46,6 +49,7 @@ router.get('/', async (req, res) => {
         // console.log(postData)
         // console.log("posts")
         // console.log(posts)
+        // res.json(postData)
         res.render('homepage', {
             posts
         })
