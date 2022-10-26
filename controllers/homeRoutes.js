@@ -1,21 +1,47 @@
 const router = require('express').Router();
-const { post } = require('../controllera');
+// const { post } = require('../controllera');
 const { User, Post, Comment } = require('../models');
+const { findAll } = require('../models/User');
 const withAuth = require('../utils/auth');
 
-//lets start to build out the information and homepage info
-//need to work on handlebars first
-router.get('/', async (req, res) => {
-    const postData = await Post.findAll({
-        include: [{
-            model: Comment,
-            attributes: ['comment_text']
-        }]
-    });
-    const posts = postData.map((post) => post.get({ plain: true }))
-    res.render('test', {
-        post,
-        logged_in: req.session.logged_in
-    })
+//this should be localhost:3001/signup
+router.get('/signup', async (req, res) => {
+    if (req.session.loggedIn) {
+        res.redirect('/')
+        return
+    }
+    res.render('signup')
 }
 )
+
+router.get('/login', async (req, res) => {
+    if (req.session.loggedIn) {
+        res.redirect('/')
+        return
+    }
+    res.render('login')
+})
+
+router.get('/dashboard', async (req, res) => {
+    try {
+        const postData = await Post.findAll({
+            // include: [{
+            //     model: Comment,
+            //     attributes: ['comment_text', 'user_id']
+            // }]
+        })
+        const posts = postData.map((post) =>
+            post.get({ plain: true })
+        )
+        console.log(postData)
+        console.log("posts")
+        console.log(posts)
+        res.render('dashboard', {
+            posts
+        })
+    } catch (err) {
+        res.status(500).json(err)
+    }
+
+})
+module.exports = router

@@ -1,11 +1,10 @@
 const router = require('express').Router();
 const apiRoutes = require('./api');
+const homeRoutes = require('./homeRoutes')
+
 
 //need index in the PAI folder to get this to work
-router.get('/', (req, res) => {
-    res.render('test')
-})
-
+router.use('/', homeRoutes)
 router.use('/api', apiRoutes);
 
 router.use((req, res) => {
