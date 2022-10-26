@@ -1,5 +1,8 @@
 <li class="card mb-3">
-    <h2 class="card-header">{{post_title}}</h2>
+    <div class="card-header d-flex justify-content-between">
+        <p>{{post_title}}</p>
+        <p>{{User.username}}</p>
+    </div>
     <p class="card-body">{{post_text}}</p>
 </li>
 {{!-- <section>

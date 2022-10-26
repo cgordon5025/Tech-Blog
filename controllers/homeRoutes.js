@@ -33,6 +33,11 @@ router.get('/dashboard', async (req, res) => {
         const posts = postData.map((post) =>
             post.get({ plain: true })
         )
+        // posts.userPost = await User.findByPk({
+        //     where: {
+        //         id: posts.user_id
+        //     }
+        // })
         console.log(postData)
         console.log("posts")
         console.log(posts)
