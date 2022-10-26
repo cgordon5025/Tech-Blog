@@ -21,10 +21,11 @@ router.get('/login', async (req, res) => {
     }
     res.render('login')
 })
-
-router.get('/dashboard', async (req, res) => {
+//this is the homepage
+router.get('/', async (req, res) => {
     try {
         const postData = await Post.findAll({
+            // where: { userID: req.session.userID }
             // include: [{
             //     model: Comment,
             //     attributes: ['comment_text', 'user_id']
@@ -35,13 +36,17 @@ router.get('/dashboard', async (req, res) => {
         )
         // posts.userPost = await User.findByPk({
         //     where: {
-        //         id: posts.user_id
+        //         id: user_id
         //     }
         // })
-        console.log(postData)
-        console.log("posts")
-        console.log(posts)
-        res.render('dashboard', {
+
+        //as is its trying to wait for the post findbyPK to run
+        console.log("finding the user who posted")
+        // console.log(userID)
+        // console.log(postData)
+        // console.log("posts")
+        // console.log(posts)
+        res.render('homepage', {
             posts
         })
     } catch (err) {
@@ -49,4 +54,22 @@ router.get('/dashboard', async (req, res) => {
     }
 
 })
+
+//this is the dashboard with only your posts
+router.get('/dashboard', async (req, res) => {
+    try {
+        const postData = await Post.findAll({
+            where: { user_id: req.session.userID }
+        })
+        const posts = postData.map((post) =>
+            post.get({ plain: true })
+        )
+        res.render('dashboard', {
+            posts
+        })
+    } catch (err) {
+        res.status(500).json(err)
+    }
+})
+
 module.exports = router
