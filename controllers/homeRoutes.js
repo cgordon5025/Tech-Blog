@@ -37,19 +37,8 @@ router.get('/', async (req, res) => {
         const posts = postData.map((post) =>
             post.get({ plain: true })
         )
-        // posts.userPost = await User.findByPk({
-        //     where: {
-        //         id: post.user_id
-        //     }
-        // })
-
-        //as is its trying to wait for the post findbyPK to run
         console.log("finding the user who posted")
-        // console.log(userID)
-        // console.log(postData)
-        // console.log("posts")
-        // console.log(posts)
-        // res.json(postData)
+
         res.render('homepage', {
             posts
         })
@@ -60,10 +49,11 @@ router.get('/', async (req, res) => {
 })
 
 //this is the dashboard with only your posts
-router.get('/dashboard', async (req, res) => {
+router.get('/dashboard', withAuth, async (req, res) => {
     try {
         const postData = await Post.findAll({
             where: { user_id: req.session.userID }
+
         })
         const posts = postData.map((post) =>
             post.get({ plain: true })
