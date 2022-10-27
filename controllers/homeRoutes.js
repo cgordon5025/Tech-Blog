@@ -1,7 +1,6 @@
 const router = require('express').Router();
 // const { post } = require('../controllera');
 const { User, Post, Comment } = require('../models');
-const { findAll } = require('../models/User');
 const withAuth = require('../utils/auth');
 
 //this should be localhost:3001/signup
@@ -37,10 +36,9 @@ router.get('/', async (req, res) => {
         const posts = postData.map((post) =>
             post.get({ plain: true })
         )
-        console.log("finding the user who posted")
-
         res.render('homepage', {
-            posts
+            posts,
+            loggedIn: req.session.loggedIn
         })
     } catch (err) {
         res.status(500).json(err)
@@ -51,6 +49,7 @@ router.get('/', async (req, res) => {
 //this is the dashboard with only your posts
 router.get('/dashboard', withAuth, async (req, res) => {
     try {
+        console.log(req.session.userID)
         const postData = await Post.findAll({
             where: { user_id: req.session.userID }
 
