@@ -69,9 +69,10 @@ router.get('/dashboard', withAuth, async (req, res) => {
 router.get('/newpost', async (req, res) => {
     try {
         res.render('newpost', {
-            loggedIn: req.session.loggedIn
-
-        })
+            loggedIn: req.session.loggedIn,
+            user_id: req.session.userID
+        }
+        )
     } catch (err) {
         res.status(500).json(err)
     }

@@ -1,8 +1,8 @@
 const updateBtn = document.getElementById('updateBtn');
 const deleteBtn = document.getElementById('deleteBtn')
 const postID = document.getElementById('post-id').value;
-
-const updatePostHandler = async function (event) {
+console.log(postID)
+const updatePost = async function (event) {
     event.preventDefault();
 
     const titleEl = document.getElementById('postTitle');
@@ -28,5 +28,5 @@ const deletePost = async function () {
     document.location.replace('/dashboard')
 }
 
-updateBtn.addEventListener('click', updatePostHandler);
+updateBtn.addEventListener('click', updatePost);
 deleteBtn.addEventListener('click', deletePost);
