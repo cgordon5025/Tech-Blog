@@ -1,13 +1,13 @@
-<input type="hidden" name="post-id" value="{{post.id}}" />
+<input type="hidden" id="post-id" value="{{post.id}}" />
 <h2>Edit Post</h2>
 <div class="post card">
     <div class="card-header">
         <label>Title</label>
-        <input type="text" name="post-title" value="{{post.title}}" id="postTitle" />
+        <input type="text" name="post-title" value="{{post.post_title}}" id="postTitle" />
     </div>
     <form lass="card-body">
         <label>Content</label>
-        <textarea class="postText w-100">{{post.body}}</textarea>
+        <textarea class="postText w-100">{{post.post_text}}</textarea>
         <div class="d-flex justify-content-around">
             <button id="updateBtn">Update</button>
 

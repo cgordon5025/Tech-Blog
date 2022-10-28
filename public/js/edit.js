@@ -1,7 +1,6 @@
-const { json } = require("sequelize");
 const updateBtn = document.getElementById('updateBtn');
 const deleteBtn = document.getElementById('deleteBtn')
-const postID = document.querySelector('input[name="post-id]').value;
+const postID = document.getElementById('post-id').value;
 
 const updatePostHandler = async function (event) {
     event.preventDefault();
