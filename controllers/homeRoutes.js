@@ -65,4 +65,29 @@ router.get('/dashboard', withAuth, async (req, res) => {
     }
 })
 
+router.get('/newpost', async (req, res) => {
+    try {
+        res.render('newpost')
+    } catch (err) {
+        res.status(500).json(err)
+    }
+})
+
+router.get('/update/:id', withAuth, async (req, res) => {
+    try {
+        const postData = await Post.findByPk(req.params.id);
+
+        if (postData) {
+            const post = postData.get({ plain: true });
+
+            res.render('edit-post', {
+                post,
+            });
+        } else {
+            res.status(404).end();
+        }
+    } catch (err) {
+        res.redirect('login');
+    }
+});
 module.exports = router
