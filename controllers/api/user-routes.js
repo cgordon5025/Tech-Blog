@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const { User, Post, Comment } = require('../../models')
-const bcrypt = require('bcrypt');
 
 //URL here is localhost:3001/api/user/login
 
