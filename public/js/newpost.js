@@ -1,25 +1,25 @@
 const submitBtn = document.getElementById('submitPost');
-const userID = document.getElementById('user-id').value;
-console.log(userID)
+const user_id = document.getElementById('user-id').value;
+console.log(user_id)
 const submitPostHandler = async function () {
     console.log('makign a post');
 
-    const titleEl = document.getElementById('newPostTitle');
-    const textEl = document.getElementById('newPostContent')
+    const post_title = document.getElementById('newPostTitle').value;
+    const post_text = document.getElementById('newPostContent').value
 
     // const response = 
     await fetch('/api/post', {
         method: 'POST',
         body: JSON.stringify({
-            post_title: titleEl.value,
-            post_text: textEl.value,
-            user_id:1
+            post_title,
+            post_text,
+            user_id
         }),
-        header: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json' }
     })
     console.log('posting')
 
-    // document.location.replace('/dashboard')
+    document.location.replace('/dashboard')
 
     // if (response.ok) {
     //     document.location.replace('/dashboard')

@@ -5,14 +5,14 @@ console.log(postID)
 const updatePost = async function (event) {
     event.preventDefault();
 
-    const titleEl = document.getElementById('postTitle');
-    const textEl = document.getElementById('postText');
+    const post_title = document.getElementById('postTitle').value;
+    const post_text = document.getElementById('postText').value;
 
     await fetch(`/api/post/${postID}`, {
         method: 'PUT',
         body: JSON.stringify({
-            titleEl,
-            textEl,
+            post_title,
+            post_text
         }),
         headers: {
             'Content-Type': 'application/json'

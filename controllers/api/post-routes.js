@@ -12,11 +12,12 @@ router.get('/', async (req, res) => {
 //lets make a new post
 // /api/post
 router.post('/', async (req, res) => {
+    const body = req.body
+    console.log(body)
     try {
+
         const postData = await Post.create({
-            post_title: req.body.post_title,
-            post_text: req.body.post_text,
-            user_id: req.body.user_id
+            ...body
         })
         res.json(postData)
     } catch (err) {

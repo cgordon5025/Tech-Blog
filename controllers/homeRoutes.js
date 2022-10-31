@@ -79,6 +79,8 @@ router.get('/newpost', async (req, res) => {
 })
 
 router.get('/update/:id', withAuth, async (req, res) => {
+    const user_id = req.session.userID
+    const post_id = req.params.id
     try {
         const postData = await Post.findByPk(req.params.id);
 
@@ -87,7 +89,9 @@ router.get('/update/:id', withAuth, async (req, res) => {
 
             res.render('edit-post', {
                 post,
-                loggedIn: req.session.loggedIn
+                loggedIn: req.session.loggedIn,
+                user_id,
+                post_id
             });
         } else {
             res.status(404).end();
@@ -96,4 +100,30 @@ router.get('/update/:id', withAuth, async (req, res) => {
         res.redirect('login');
     }
 });
+
+router.get('/comment/:id', async (req, res) => {
+    const user_id = req.session.userID
+    const post_id = req.params.id
+    try {
+        const postData = await Post.findByPk(req.params.id, {
+            include: [{ model: User }]
+        });
+
+        if (postData) {
+            const post = postData.get({ plain: true });
+
+            console.log(post)
+            res.render('single_post', {
+                post,
+                loggedIn: req.session.loggedIn,
+                user_id,
+                post_id
+            });
+        } else {
+            res.status(404).end();
+        }
+    } catch (err) {
+        res.redirect('login');
+    }
+})
 module.exports = router
