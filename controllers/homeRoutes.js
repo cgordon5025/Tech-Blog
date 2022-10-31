@@ -106,24 +106,24 @@ router.get('/comment/:id', async (req, res) => {
     const post_id = req.params.id
     try {
         const postData = await Post.findByPk(req.params.id, {
-            include: [{ model: User }]
+        });
+        const commentData = await Comment.findAll({
+            where: { post_id: req.params.id }
+        })
+        console.log(commentData)
+        const post = postData.get({ plain: true });
+        const comments = commentData.map((commet) => comment.get({ plain: true }))
+        console.log(comments)
+        res.render('single_post', {
+            post,
+            comments,
+            loggedIn: req.session.loggedIn,
+            user_id,
+            post_id
         });
 
-        if (postData) {
-            const post = postData.get({ plain: true });
-
-            console.log(post)
-            res.render('single_post', {
-                post,
-                loggedIn: req.session.loggedIn,
-                user_id,
-                post_id
-            });
-        } else {
-            res.status(404).end();
-        }
     } catch (err) {
-        res.redirect('login');
+        res.redirect('/');
     }
 })
 module.exports = router

@@ -1,9 +1,13 @@
 <li data-postid="{{post_id}}" class="card mb-3">
     <a class='commentLink' href="/comment/{{id}}">
         <div class="card-header d-flex justify-content-between" id="postHeader">
-            <p>{{post_title}}</p>
-            <p>{{user.username}} {{format_time createdAt}}</p>
+            <p>{{post.post_title}}</p>
+            <p>{{post.user.username}} {{format_time post.createdAt}}</p>
         </div>
-        <p class="card-body">{{post_text}}</p>
+        <p class="card-body">{{post.post_text}}</p>
     </a>
 </li>
+
+{{#each comments as |comment|}}
+{{>comment-details}}
+{{/each}}
