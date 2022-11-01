@@ -101,19 +101,22 @@ router.get('/update/:id', withAuth, async (req, res) => {
     }
 });
 
-router.get('/comment/:id', async (req, res) => {
+router.get('/post/:id', async (req, res) => {
     const user_id = req.session.userID
     const post_id = req.params.id
     try {
         const postData = await Post.findByPk(req.params.id, {
+            include: [{ model: Comment }, { model: User }]
         });
         const commentData = await Comment.findAll({
-            where: { post_id: req.params.id }
+            where: { post_id: req.params.id },
+            include: ({ model: User })
         })
-        console.log(commentData)
+
+        // console.log(commentData)
         const post = postData.get({ plain: true });
-        const comments = commentData.map((commet) => comment.get({ plain: true }))
-        console.log(comments)
+        const comments = commentData.map((comment) => comment.get({ plain: true }))
+        console.log(post)
         res.render('single_post', {
             post,
             comments,
@@ -126,4 +129,6 @@ router.get('/comment/:id', async (req, res) => {
         res.redirect('/');
     }
 })
+
+
 module.exports = router

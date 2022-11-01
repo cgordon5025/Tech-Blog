@@ -20,12 +20,6 @@ const submitPostHandler = async function () {
     console.log('posting')
 
     document.location.replace('/dashboard')
-
-    // if (response.ok) {
-    //     document.location.replace('/dashboard')
-    // } else {
-    //     alert('failed to post')
-    // }
 }
 
 submitBtn.addEventListener('click', submitPostHandler)

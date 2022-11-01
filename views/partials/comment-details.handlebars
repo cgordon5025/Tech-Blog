@@ -1,1 +1,11 @@
-<p> stuff</p>
+<li class="card mb-3">
+    <a class='commentLink' href="/comment/{{id}}">
+        <div class="card-header d-flex justify-content-between" id="postHeader">
+
+        </div>
+        <p class="card-body">{{comment_text}}</p>
+        <p>{{user.username}} {{format_time createdAt}}</p>
+
+    </a>
+</li>
+

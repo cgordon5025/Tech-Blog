@@ -1,4 +1,4 @@
-<li data-postid="{{post_id}}" class="card mb-3">
+<li data-postid="{{post_id}}" id="postID"class="card mb-3">
     <a class='commentLink' href="/comment/{{id}}">
         <div class="card-header d-flex justify-content-between" id="postHeader">
             <p>{{post.post_title}}</p>
@@ -11,3 +11,15 @@
 {{#each comments as |comment|}}
 {{>comment-details}}
 {{/each}}
+
+<button data-userid="{{user_id}}" id="newCommentBtn">Add a New Comment</button>
+<br>
+<br>
+<div style="display:none" id="commentContainer">
+    <label for="newComment">What would you like to say?</label>
+    <input id="newComment">
+    <button id="submitComment">Submit</button>
+</div>
+
+
+<script src="/js/comments.js"></script>
