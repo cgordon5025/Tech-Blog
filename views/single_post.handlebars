@@ -2,7 +2,7 @@
     <a class='commentLink' href="/comment/{{id}}">
         <div class="card-header d-flex justify-content-between" id="postHeader">
             <p>{{post.post_title}}</p>
-            <p>{{post.user.username}} {{format_time post.createdAt}}</p>
+            <p>Posted by {{post.user.username}} {{format_time post.createdAt}}</p>
         </div>
         <p class="card-body">{{post.post_text}}</p>
     </a>
